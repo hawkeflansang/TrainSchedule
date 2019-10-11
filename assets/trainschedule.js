@@ -12,3 +12,29 @@ var config = {
 firebase.initializeApp(config);
 
 var database = firebase.database();
+
+
+$("#add-train-btn").on("click", function(event) {
+    event.preventDefault();
+
+    var trainName = $("#train-name-input").val().trim();
+    var trainDestination = $("#destination-input").val().trim();
+    var trainFirst = moment($("#first-train-input").val().trim(),"hh:mm").format("X");
+    var trainFrequency = moment($("#frequency-input").val().trim(),"minutes").format("X");
+
+    var newTrain = {
+        name: trainName,
+        destination: trainDestination,
+        firstArrivval: trainFirst,
+        frequency: trainFrequency
+    };
+
+    database.ref().push(newTrain);
+
+    console.log(newTrain.name);
+    console.log(newTrain.destination);
+    console.log(newTrain.firstArrival);
+    console.log(newTrain.frequency);
+
+
+})
